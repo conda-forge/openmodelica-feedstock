@@ -10,7 +10,7 @@ source:
   sha256: f3cdf2136ece0f3d0e90b116c2b6d7106a5533c1e04321b133919c3dbd87bbae
 
 build:
-  number: 0
+  number: 1
   skip:
     - not linux
 
@@ -24,10 +24,10 @@ requirements:
     - ${{ compiler('fortran') }}
     - if: unix
       then:
-       - pkg-config
-       - autoconf
-       - automake
-       - make
+        - pkg-config
+        - autoconf
+        - automake
+        - make
   host:
     - openjdk
     - libblas
@@ -68,29 +68,29 @@ tests:
         - OMCompiler/Examples/Circle.mo
 
 about:
-   homepage: https://openmodelica.org/
-   license: LicenseRef-OSMC-PL
-   license_family: GPL
-   license_file:
-     - OSMC-License.txt
-     - OMCompiler/3rdParty/antlr/3.2/libantlr3c-3.2/COPYING
-     - OMCompiler/3rdParty/Cdaskr/LICENSE
-     - OMCompiler/3rdParty/CMinpack/CopyrightMINPACK.txt
-     - OMCompiler/3rdParty/gc/README.md
-     - OMCompiler/3rdParty/FMIL/LICENSE.md
-     - OMCompiler/3rdParty/libffi/LICENSE
-     - OMCompiler/3rdParty/libzmq/COPYING.LESSER
-     - OMCompiler/3rdParty/lis-1.4.12/COPYING
-     - OMCompiler/3rdParty/metis-5.1.0/LICENSE.txt
-     - OMCompiler/3rdParty/moo-0.1.0/COPYING.LESSER
-     - OMCompiler/3rdParty/open62541/open62541.txt
-     - OMCompiler/3rdParty/primme-3.2.3/COPYING.txt
-     - OMCompiler/3rdParty/ryu/LICENSE-Apache2
-     - OMCompiler/3rdParty/SuiteSparse-5.8.1/LICENSE.txt
-     - OMCompiler/3rdParty/sundials-5.4.0/LICENSE
-     - OMCompiler/3rdParty/tbb/LICENSE
-     - OMCompiler/3rdParty/zlib/LICENSE
-   summary: The Open Source Modelica Suite
+  homepage: https://openmodelica.org/
+  license: LicenseRef-OSMC-PL
+  license_family: GPL
+  license_file:
+    - OSMC-License.txt
+    - OMCompiler/3rdParty/antlr/3.2/libantlr3c-3.2/COPYING
+    - OMCompiler/3rdParty/Cdaskr/LICENSE
+    - OMCompiler/3rdParty/CMinpack/CopyrightMINPACK.txt
+    - OMCompiler/3rdParty/gc/README.md
+    - OMCompiler/3rdParty/FMIL/LICENSE.md
+    - OMCompiler/3rdParty/libffi/LICENSE
+    - OMCompiler/3rdParty/libzmq/COPYING.LESSER
+    - OMCompiler/3rdParty/lis-1.4.12/COPYING
+    - OMCompiler/3rdParty/metis-5.1.0/LICENSE.txt
+    - OMCompiler/3rdParty/moo-0.1.0/COPYING.LESSER
+    - OMCompiler/3rdParty/open62541/open62541.txt
+    - OMCompiler/3rdParty/primme-3.2.3/COPYING.txt
+    - OMCompiler/3rdParty/ryu/LICENSE-Apache2
+    - OMCompiler/3rdParty/SuiteSparse-5.8.1/LICENSE.txt
+    - OMCompiler/3rdParty/sundials-5.4.0/LICENSE
+    - OMCompiler/3rdParty/tbb/LICENSE
+    - OMCompiler/3rdParty/zlib/LICENSE
+  summary: The Open Source Modelica Suite
 
 extra:
   recipe-maintainers:
