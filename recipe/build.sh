@@ -2,9 +2,6 @@
 
 set -x
 
-# compiler gets hardcoded in libOpenModelicaCompiler.so
-export CC=$(basename ${CC})
-
 # error: expected '=', ',', ';', 'asm' or '__attribute__' before 'void'
 curl -L https://github.com/OpenModelica/OMCompiler-3rdParty/pull/89.patch | patch -p1 -d OMCompiler/3rdParty
 
@@ -21,5 +18,6 @@ cmake ${CMAKE_ARGS} -G "Ninja" -LAH \
   -DOM_OMC_ENABLE_FORTRAN=ON -DOM_OMC_ENABLE_OPTIMIZATION=ON -DOM_OMC_ENABLE_MOO=ON \
   -DOM_USE_CCACHE=OFF \
   -DBLA_VENDOR=Generic \
+  -DCMAKE_C_COMPILER=`basename ${CC}` \
   -B build -S .
 cmake --build build --target install --parallel ${CPU_COUNT}
