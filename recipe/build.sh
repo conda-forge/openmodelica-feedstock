@@ -2,6 +2,9 @@
 
 set -x
 
+# compiler gets hardcoded in libOpenModelicaCompiler.so
+export CC=$(basename ${CC})
+
 # error: expected '=', ',', ';', 'asm' or '__attribute__' before 'void'
 curl -L https://github.com/OpenModelica/OMCompiler-3rdParty/pull/89.patch | patch -p1 -d OMCompiler/3rdParty
 
