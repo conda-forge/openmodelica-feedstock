@@ -13,7 +13,7 @@ head -n -5 OMCompiler/SimulationRuntime/c/CMakeLists.txt > CMakeLists.txt.new &&
 
 cmake -G "Ninja" -LAH \
   -DCMAKE_C_COMPILER=`basename ${CC}` \
-  ${CMAKE_ARGS} \  
+  ${CMAKE_ARGS} \
   -DCMAKE_INSTALL_PREFIX=${PREFIX} \
   -DCMAKE_PREFIX_PATH=${PREFIX} \
   -DOM_ENABLE_GUI_CLIENTS=ON -DOM_QT_MAJOR_VERSION=5 -DOM_OMEDIT_ENABLE_QTWEBENGINE=ON \
