@@ -8,9 +8,11 @@ package:
 source:
   url: https://build.openmodelica.org/apt/pool/contrib/openmodelica_${{ version }}.orig.tar.xz
   sha256: f3cdf2136ece0f3d0e90b116c2b6d7106a5533c1e04321b133919c3dbd87bbae
+  patches:
+    - relative-cc.patch
 
 build:
-  number: 4
+  number: 5
   skip:
     - not linux
 
