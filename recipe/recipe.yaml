@@ -1,5 +1,5 @@
 context:
-  version: "1.26.3"
+  version: "1.26.4"
 
 package:
   name: openmodelica
@@ -7,12 +7,12 @@ package:
 
 source:
   url: https://build.openmodelica.org/apt/pool/contrib/openmodelica_${{ version }}.orig.tar.xz
-  sha256: f3cdf2136ece0f3d0e90b116c2b6d7106a5533c1e04321b133919c3dbd87bbae
+  sha256: 88917aa7a9ba321a6e0c30c6bf66981c8f6a3b92e5bc2ff54fcb9499433ef5d0
   patches:
     - relative-cc.patch
 
 build:
-  number: 6
+  number: 0
   skip:
     - not linux
 
