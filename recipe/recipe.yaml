@@ -1,14 +1,17 @@
 context:
-  version: "1.26.4"
+  version: "1.26.7"
 
 package:
   name: openmodelica
   version: ${{ version }}
 
 source:
-  url: https://build.openmodelica.org/apt/pool/contrib/openmodelica_${{ version }}.orig.tar.xz
-  sha256: 88917aa7a9ba321a6e0c30c6bf66981c8f6a3b92e5bc2ff54fcb9499433ef5d0
+  url: https://github.com/OpenModelica/OpenModelica/releases/download/v${{ version }}/OpenModelica-src-with-submodules.zip
+  sha256: d10452033473333e216d0a9e4fa2c1e2ef24ffa9c1bfde0acd4c045f2107b613
   patches:
+    # drop erroneous _GNU_SOURCE define
+    - fmilib-gnusource.patch
+    # keep compiler path relative for relocation
     - relative-cc.patch
 
 build:
