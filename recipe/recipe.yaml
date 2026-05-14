@@ -13,6 +13,7 @@ source:
     - fmilib-gnusource.patch
     # keep compiler path relative for relocation
     - relative-cc.patch
+    - 0001-Add-system-libffi-option.patch
 
 build:
   number: 0
@@ -39,6 +40,7 @@ requirements:
     - liblapack
     - libcurl
     - libboost-devel
+    - libffi
     - libiconv
     - qt-webengine
     - openscenegraph
