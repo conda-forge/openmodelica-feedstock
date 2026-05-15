@@ -1,0 +1,21 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 776c74f..92e6f0e 100644
+--- a/OMSimulator/3rdParty/CMakeLists.txt
++++ b/OMSimulator/3rdParty/CMakeLists.txt
+@@ -34,7 +34,15 @@ add_library(oms::3rd::kinsol ALIAS sundials_kinsol_static)
+ #########################################################################
+ ## zlib.
+ ## Used by minizip and fmi4c. It should be added before them.
+-add_subdirectory(zlib EXCLUDE_FROM_ALL)
++option(OM_USE_SYSTEM_ZLIB "Use system zlib" OFF)
++if (OM_USE_SYSTEM_ZLIB)
++  set(ZLIB_USE_STATIC_LIBS ON)
++  find_package(ZLIB MODULE REQUIRED)
++  add_library(zlibstatic INTERFACE)
++  target_link_libraries(zlibstatic INTERFACE ZLIB::ZLIB)
++else ()
++  add_subdirectory(zlib EXCLUDE_FROM_ALL)
++endif ()
+ add_library(oms::3rd::zlib ALIAS zlibstatic)
+ 
+ #########################################################################
