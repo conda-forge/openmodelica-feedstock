@@ -1,0 +1,80 @@
+diff --git a/OMEdit/OMEditGUI/CMakeLists.txt b/OMEdit/OMEditGUI/CMakeLists.txt
+index bad8751c77..567918b10f 100644
+--- a/OMEdit/OMEditGUI/CMakeLists.txt
++++ b/OMEdit/OMEditGUI/CMakeLists.txt
+@@ -11,7 +11,7 @@ else()
+   set(app_icon_macos "")
+ endif()
+ 
+-add_executable(OMEdit WIN32 MACOSX_BUNDLE main.cpp rc_omedit.rc ${app_icon_macos})
++add_executable(OMEdit WIN32 main.cpp rc_omedit.rc ${app_icon_macos})
+ target_link_libraries(OMEdit PRIVATE OMEditLib)
+ 
+ if(APPLE)
+@@ -71,5 +71,5 @@ if(OM_OMEDIT_INSTALL_RUNTIME_DLLS AND MINGW)
+             POST_EXCLUDE_REGEXES ".*system32/.*\\.dll")
+ else()
+   install(TARGETS OMEdit
+-          BUNDLE DESTINATION ${OM_MACOS_INSTALL_BUNDLEDIR})
++          DESTINATION ${CMAKE_INSTALL_BINDIR})
+ endif()
+diff --git a/OMNotebook/OMNotebook/OMNotebookGUI/CMakeLists.txt b/OMNotebook/OMNotebook/OMNotebookGUI/CMakeLists.txt
+index d9e6102869..7b0be84088 100644
+--- a/OMNotebook/OMNotebook/OMNotebookGUI/CMakeLists.txt
++++ b/OMNotebook/OMNotebook/OMNotebookGUI/CMakeLists.txt
+@@ -100,7 +100,7 @@ else()
+   set(app_icon_macos "")
+ endif()
+ 
+-add_executable(OMNotebook WIN32 MACOSX_BUNDLE ${OMNOTEBOOKLIB_SOURCES} ${OMNOTEBOOKLIB_HEADERS} rc_omnotebook.rc ${app_icon_macos})
++add_executable(OMNotebook WIN32 ${OMNOTEBOOKLIB_SOURCES} ${OMNOTEBOOKLIB_HEADERS} rc_omnotebook.rc ${app_icon_macos})
+ target_compile_definitions(OMNotebook PRIVATE OMNOTEBOOKLIB_MOC_INCLUDE)
+ 
+ target_include_directories(OMNotebook PUBLIC ${CMAKE_CURRENT_SOURCE_DIR})
+@@ -122,7 +122,7 @@ endif()
+ 
+ 
+ install(TARGETS OMNotebook
+-        BUNDLE DESTINATION ${OM_MACOS_INSTALL_BUNDLEDIR})
++        DESTINATION ${CMAKE_INSTALL_BINDIR})
+ install(FILES stylesheet.xml
+               commands.xml
+         DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/omnotebook/)
+diff --git a/OMPlot/OMPlot/OMPlotGUI/CMakeLists.txt b/OMPlot/OMPlot/OMPlotGUI/CMakeLists.txt
+index a1d187d953..1349517cd1 100644
+--- a/OMPlot/OMPlot/OMPlotGUI/CMakeLists.txt
++++ b/OMPlot/OMPlot/OMPlotGUI/CMakeLists.txt
+@@ -64,10 +64,10 @@ else()
+   set(app_icon_macos "")
+ endif()
+ 
+-add_executable(OMPlot WIN32 MACOSX_BUNDLE main.cpp rc_omplot.rc ${app_icon_macos})
++add_executable(OMPlot WIN32 main.cpp rc_omplot.rc ${app_icon_macos})
+ target_link_libraries(OMPlot PRIVATE OMPlotLib)
+ 
+ 
+ install(TARGETS OMPlotLib)
+ install(TARGETS OMPlot
+-        BUNDLE DESTINATION ${OM_MACOS_INSTALL_BUNDLEDIR})
++        DESTINATION ${CMAKE_INSTALL_BINDIR})
+diff --git a/OMShell/OMShell/OMShellGUI/CMakeLists.txt b/OMShell/OMShell/OMShellGUI/CMakeLists.txt
+index ed5598ddf2..7edd6c3e9d 100644
+--- a/OMShell/OMShell/OMShellGUI/CMakeLists.txt
++++ b/OMShell/OMShell/OMShellGUI/CMakeLists.txt
+@@ -27,7 +27,7 @@ else()
+   set(app_icon_macos "")
+ endif()
+ 
+-add_executable(OMShell WIN32 MACOSX_BUNDLE ${OMSHELLL_SOURCES}
++add_executable(OMShell WIN32 ${OMSHELLL_SOURCES}
+                                            ${OMSHELLL_HEADERS}
+                                            ${app_icon_macos})
+ 
+@@ -38,6 +38,6 @@ target_link_libraries(OMShell PRIVATE Qt${OM_QT_MAJOR_VERSION}::PrintSupport)
+ 
+ 
+ install(TARGETS OMShell
+-        BUNDLE DESTINATION ${OM_MACOS_INSTALL_BUNDLEDIR})
++        DESTINATION ${CMAKE_INSTALL_BINDIR})
+ install(FILES commands.xml
+         DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/omshell)
