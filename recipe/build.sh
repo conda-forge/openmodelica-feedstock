@@ -7,5 +7,6 @@ cmake ${CMAKE_ARGS} -G "Ninja" -LAH \
   -DOM_OMC_ENABLE_FORTRAN=ON -DOM_OMC_ENABLE_OPTIMIZATION=ON -DOM_OMC_ENABLE_MOO=ON \
   -DOM_USE_CCACHE=OFF \
   -DOM_USE_SYSTEM_LIBFFI=ON \
+  -DOM_USE_SYSTEM_ZLIB=ON \
   -B build -S .
 cmake --build build --target install --parallel ${CPU_COUNT}

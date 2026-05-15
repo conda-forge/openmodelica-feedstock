@@ -16,6 +16,8 @@ source:
     - 0001-Add-system-libffi-option.patch
     # RUNTIME_DEPENDENCIES needs FRAMEWORK DESTINATION
     - framework.patch
+    # stdio.h:210:7: error: expected identifier or '('
+    - zlib.patch
 
 build:
   number: 0
