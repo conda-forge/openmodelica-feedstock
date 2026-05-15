@@ -14,11 +14,13 @@ source:
     # keep compiler path relative for relocation
     - relative-cc.patch
     - 0001-Add-system-libffi-option.patch
+    # RUNTIME_DEPENDENCIES needs FRAMEWORK DESTINATION
+    - framework.patch
 
 build:
   number: 0
   skip:
-    - not linux
+    - win
 
 requirements:
   build:
