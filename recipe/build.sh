@@ -8,5 +8,6 @@ cmake ${CMAKE_ARGS} -G "Ninja" -LAH \
   -DOM_USE_CCACHE=OFF \
   -DOM_USE_SYSTEM_LIBFFI=ON \
   -DOM_USE_SYSTEM_ZLIB=ON \
+  -DOM_MACOS_APP_BUNDLE=OFF \
   -B build -S .
 cmake --build build --target install --parallel ${CPU_COUNT}
