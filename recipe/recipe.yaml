@@ -20,6 +20,8 @@ source:
     - zlib.patch
     # dont install under PREFIX/Applications
     - bundle.patch
+    # drop erroneous -undefined,error linker flag
+    - undefined.patch
 
 build:
   number: 0
