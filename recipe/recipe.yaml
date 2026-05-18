@@ -25,9 +25,11 @@ source:
     - undefined.patch
     # add macos/aarch64 platforms (https://github.com/robbr48/fmi4c/pull/97)
     - fmi4c.patch
+    # set version from file (https://github.com/OpenModelica/OpenModelica/pull/15573)
+    - version.patch
 
 build:
-  number: 1
+  number: 2
   skip:
     - win
 
