@@ -25,7 +25,7 @@ source:
     - undefined.patch
     # add macos/aarch64 platforms (https://github.com/robbr48/fmi4c/pull/97)
     - fmi4c.patch
-
+    - cminpack.patch
 build:
   number: 1
   skip:
@@ -55,6 +55,7 @@ requirements:
     - libiconv
     - qt-webengine
     - openscenegraph
+    - cminpack
     - if: linux
       then:
         - libgl-devel
