@@ -1,0 +1,20 @@
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 2177dca6..86d675ee 100644
+--- a/OMCompiler/3rdParty/CMakeLists.txt
++++ b/OMCompiler/3rdParty/CMakeLists.txt
+@@ -123,7 +123,14 @@ omc_add_subdirectory(libzmq)
+ add_library(omc::3rd::libzmq ALIAS libzmq-static)
+ 
+ # simdjson
+-omc_add_subdirectory(simdjson)
++option(OM_USE_SYSTEM_SIMDJSON "Use system simdjson" OFF)
++if (OM_USE_SYSTEM_SIMDJSON)
++  find_package(simdjson CONFIG REQUIRED)
++  add_library(simdjson INTERFACE)
++  target_link_libraries(simdjson INTERFACE simdjson::simdjson)
++else ()
++  omc_add_subdirectory(simdjson)
++endif ()
+ add_library(omc::3rd::simdjson ALIAS simdjson)
+ 
+ #lis

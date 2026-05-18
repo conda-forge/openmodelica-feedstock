@@ -27,6 +27,7 @@ source:
     - fmi4c.patch
     # set version from file (https://github.com/OpenModelica/OpenModelica/pull/15573)
     - version.patch
+    - simdjson.patch
 
 build:
   number: 2
@@ -57,6 +58,7 @@ requirements:
     - libiconv
     - qt-webengine
     - openscenegraph
+    - simdjson
     - if: linux
       then:
         - libgl-devel
