@@ -53,6 +53,7 @@ requirements:
     - libboost-devel
     - libffi
     - libiconv
+    - readline
     - qt-webengine
     - openscenegraph
     - if: linux
