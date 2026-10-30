@@ -54,7 +54,7 @@ requirements:
     - libffi
     - libiconv
     - readline
-    - qt-webengine
+    - qt6-webengine
     - openscenegraph
     - if: linux
       then:
