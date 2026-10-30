@@ -1,7 +1,7 @@
 context:
   version: "1.27.1"
 
-package:
+recipe:
   name: openmodelica
   version: ${{ version }}
 
@@ -27,65 +27,138 @@ source:
     - 0001-SimRT-C-Mismatching-clang-flags.patch
 
 build:
-  number: 0
+  number: 1
   skip:
     - win
 
-requirements:
-  build:
-    - cmake
-    - ninja
-    - ${{ stdlib('c') }}
-    - ${{ compiler('c') }}
-    - ${{ compiler('cxx') }}
-    - ${{ compiler('fortran') }}
-    - if: unix
-      then:
-        - pkg-config
-        - autoconf
-        - automake
-        - make
-  host:
-    - openjdk
-    - libblas
-    - liblapack
-    - libcurl
-    - libboost-devel
-    - libffi
-    - libiconv
-    - qt-webengine
-    - openscenegraph
-    - if: linux
-      then:
-        - libgl-devel
-        - libegl-devel
-  run:
-    - openjdk
-    - cmake
-    - make
-    - zip
-    - ${{ stdlib('c') }}
-    - ${{ compiler('c') }}
-    - ${{ compiler('cxx') }}
-  run_constraints:
-    - omcompiler <0
+outputs:
+  # Build once here, then split the install tree into the packages below.
+  # This avoids building twice (https://github.com/conda-forge/openmodelica-feedstock/issues/23).
+  - staging:
+      name: openmodelica-build
+    requirements:
+      build:
+        - cmake
+        - ninja
+        - ${{ stdlib('c') }}
+        - ${{ compiler('c') }}
+        - ${{ compiler('cxx') }}
+        - ${{ compiler('fortran') }}
+        - if: unix
+          then:
+            - pkg-config
+            - autoconf
+            - automake
+            - make
+      host:
+        - openjdk
+        - libblas
+        - liblapack
+        - libcurl
+        - libboost-devel
+        - libffi
+        - libiconv
+        - readline
+        - qt-webengine
+        - openscenegraph
+        - if: linux
+          then:
+            - libgl-devel
+            - libegl-devel
+    build:
+      script:
+        file: build.sh
 
-tests:
-  - script:
-      - omc --version
-      - OMEdit --help
-      - OMSimulator --help
-      - echo 'loadFile("OMCompiler/Examples/Circle.mo"); getErrorString(); buildModelFMU(Circle); getErrorString();' > export.mos
-      - omc export.mos
-      - ls Circle.fmu
-      - OMSimulator Circle.fmu
-      - echo 'loadFile("OMCompiler/Examples/Circle.mo"); getErrorString(); buildModelFMU(Circle, platforms={"dynamic"}); getErrorString();' > export.mos
-      - omc --fmuCMakeBuild=true --fmuRuntimeDepends=modelica export.mos
-      - ls Circle.fmu
-      - OMSimulator Circle.fmu
-    files:
-      source:
-        - OMCompiler/Examples/Circle.mo
+  # Compiler-only install: omc, OMSimulator and the simulation runtimes,
+  # without the Qt GUI clients or java.
+  - package:
+      name: openmodelica-omc
+    inherit: openmodelica-build
+    build:
+      files:
+        include:
+          - bin/**
+          - doc/**
+          - etc/**
+          - include/**
+          - lib/**
+          - share/**
+        exclude:
+          # Qt GUI clients and their private libs/data (shipped in `openmodelica`)
+          - bin/OMEdit
+          - bin/OMNotebook
+          - bin/OMPlot
+          - bin/OMShell
+          - lib/omc/libOMPlotLib.so
+          - lib/omc/libomqwt.so*
+          - lib/omc/libomsensplugin.so
+          - share/omedit/**
+          - share/omnotebook/**
+          - share/omshell/**
+    requirements:
+      run:
+        - cmake
+        - make
+        - zip
+        - ${{ stdlib('c') }}
+        - ${{ compiler('c') }}
+        - ${{ compiler('cxx') }}
+      # run exports are inherited from staging; drop the pins that only the
+      # excluded GUI files above link against (verified with readelf: only
+      # OMEdit/OMNotebook/OMPlot/OMShell plus libOMPlotLib/libomqwt/
+      # libomsensplugin need Qt / OpenSceneGraph).
+      ignore_run_exports:
+        by_name:
+          - qt-webengine
+          - openscenegraph
+          - libgl
+          - libegl
+      run_constraints:
+        - omcompiler <0
+    tests:
+      - script:
+          - omc --version
+          - OMSimulator --help
+          - echo 'loadFile("OMCompiler/Examples/Circle.mo"); getErrorString(); buildModelFMU(Circle); getErrorString();' > export.mos
+          - omc export.mos
+          - ls Circle.fmu
+          - OMSimulator Circle.fmu
+          - echo 'loadFile("OMCompiler/Examples/Circle.mo"); getErrorString(); buildModelFMU(Circle, platforms={"dynamic"}); getErrorString();' > export.mos
+          - omc --fmuCMakeBuild=true --fmuRuntimeDepends=modelica export.mos
+          - ls Circle.fmu
+          - OMSimulator Circle.fmu
+        files:
+          source:
+            - OMCompiler/Examples/Circle.mo
+
+  # Full install: the Qt GUI clients on top of openmodelica-omc.
+  # `install openmodelica` resolves to the same files in the same prefix as before.
+  - package:
+      name: openmodelica
+    inherit: openmodelica-build
+    build:
+      files:
+        - bin/OMEdit
+        - bin/OMNotebook
+        - bin/OMPlot
+        - bin/OMShell
+        - lib/omc/libOMPlotLib.so
+        - lib/omc/libomqwt.so*
+        - lib/omc/libomsensplugin.so
+        - share/omedit/**
+        - share/omnotebook/**
+        - share/omshell/**
+    requirements:
+      run:
+        - ${{ pin_subpackage('openmodelica-omc', exact=True) }}
+        - openjdk
+        - qt-webengine
+        - openscenegraph
+      run_constraints:
+        - omcompiler <0
+    tests:
+      - script:
+          - OMEdit --help
 
 about:
   homepage: https://openmodelica.org/
