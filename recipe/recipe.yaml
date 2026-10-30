@@ -59,7 +59,7 @@ outputs:
         - libffi
         - libiconv
         - readline
-        - qt-webengine
+        - qt6-webengine
         - openscenegraph
         - if: linux
           then:
@@ -112,7 +112,7 @@ outputs:
       # libomsensplugin need Qt / OpenSceneGraph).
       ignore_run_exports:
         by_name:
-          - qt-webengine
+          - qt6-webengine
           - openscenegraph
           - libgl
           - libegl
@@ -155,7 +155,7 @@ outputs:
       run:
         - ${{ pin_subpackage('openmodelica-omc', exact=True) }}
         - openjdk
-        - qt-webengine
+        - qt6-webengine
         - openscenegraph
       run_constraints:
         - omcompiler <0
