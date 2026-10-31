@@ -32,6 +32,7 @@ build:
   number: 1
   skip:
     - win
+    - osx and x86_64
 
 outputs:
   # Build once here, then split the install tree into the packages below.
