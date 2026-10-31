@@ -61,6 +61,7 @@ Current release info
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
 | [![Conda Recipe](https://img.shields.io/badge/recipe-openmodelica-green.svg)](https://anaconda.org/conda-forge/openmodelica) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/openmodelica.svg)](https://anaconda.org/conda-forge/openmodelica) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/openmodelica.svg)](https://anaconda.org/conda-forge/openmodelica) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/openmodelica.svg)](https://anaconda.org/conda-forge/openmodelica) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-openmodelica--omc-green.svg)](https://anaconda.org/conda-forge/openmodelica-omc) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/openmodelica-omc.svg)](https://anaconda.org/conda-forge/openmodelica-omc) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/openmodelica-omc.svg)](https://anaconda.org/conda-forge/openmodelica-omc) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/openmodelica-omc.svg)](https://anaconda.org/conda-forge/openmodelica-omc) |
 
 Installing openmodelica
 =======================
@@ -79,7 +80,7 @@ How to use
 <summary>With conda</summary>
 
 ```
-conda install openmodelica
+conda install openmodelica openmodelica-omc
 ```
 
 </details>
@@ -88,7 +89,7 @@ conda install openmodelica
 <summary>With mamba</summary>
 
 ```
-mamba install openmodelica
+mamba install openmodelica openmodelica-omc
 ```
 
 </details>
@@ -98,9 +99,9 @@ mamba install openmodelica
 
 ```
 # for adding to your local project
-pixi add openmodelica
+pixi add openmodelica openmodelica-omc
 # for installing globally
-pixi global install openmodelica
+pixi global install openmodelica openmodelica-omc
 ```
 
 </details>
