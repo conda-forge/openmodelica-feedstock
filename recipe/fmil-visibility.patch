@@ -1,0 +1,16 @@
+--- a/OMCompiler/3rdParty/FMIL/CMakeLists.txt
++++ b/OMCompiler/3rdParty/FMIL/CMakeLists.txt
+@@ -124,13 +124,6 @@
+ IF(CMAKE_COMPILER_IS_GNUCC)
+    SET(SAVED_C_DEFAULT_FLAGS "${CMAKE_C_FLAGS}")
+    SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c89 -pedantic -Wall -Wno-unused-function")
+-   if(NOT MSYS)
+-	include(CheckCCompilerFlag)
+-	CHECK_C_COMPILER_FLAG("-fvisibility=hidden" SUPPORT_VISIBILITY)
+-	if(SUPPORT_VISIBILITY)
+-		SET(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -fvisibility=hidden")
+-	endif()
+-  endif()
+ ENDIF(CMAKE_COMPILER_IS_GNUCC)
+ 
+ # The config files will end up in the binary dir
