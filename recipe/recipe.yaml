@@ -32,6 +32,7 @@ build:
   number: 0
   skip:
     - win
+    - osx and x86_64
 
 requirements:
   build:
