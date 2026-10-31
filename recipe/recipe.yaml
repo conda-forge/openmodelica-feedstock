@@ -21,6 +21,8 @@ source:
     - syntaxerror.patch
     # error: no member named 'random_shuffle' in namespace 'std' (https://github.com/OpenModelica/OMCompiler-3rdParty/pull/219)
     - random_shuffle.patch
+    # hidden symbol `XML_SetUserData' in libfmilib.a(xmlparse.c.o) is referenced by DSO (OMEdit link with Qt6WebEngine/OSG)
+    - fmil-visibility.patch
     # ld: unknown option: --no-undefined (https://github.com/OpenModelica/OpenModelica/pull/15990)
     - undefined.patch
     # cc1: error: '-Werror=c23-extensions': no option '-Wc23-extensions (https://github.com/OpenModelica/OpenModelica/pull/16297)
