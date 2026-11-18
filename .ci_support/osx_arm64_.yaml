@@ -30,6 +30,8 @@ libffi:
 - '3.7'
 libiconv:
 - '1'
+libintl:
+- '0.25'
 liblapack:
 - 3.9.* *netlib
 macos_machine:
