@@ -70,7 +70,7 @@ outputs:
             - libegl-devel
         - if: osx
           then:
-            - libintl
+            - libintl-devel
     build:
       script:
         file: build.sh
